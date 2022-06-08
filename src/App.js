@@ -29,7 +29,7 @@ function Nav(props){
   taglist = taglist.map(e=>{
     return <li key = {e.id}><a href = {'/read'+e.id} onClick = {()=>{
       props.onSelect(e.id);
-      debugger;
+      // debugger;
     }}>{e.title}</a></li>
   })
   return <nav>
@@ -54,16 +54,25 @@ function createHandler (){
 
 
 function App() {
+  console.log('useState:',useState('a'));
   const topics = [
     {id : 1, title : 'html', body : "html is..."},
     {id : 2, title : "css", body : "css is ..."}
   ];
   const [value, setValue] = useState(0);
+  const [mode, setMode] = useState('Welcome');
+  // let mode = 'Welcome';
+  let content = null;
+  if(mode === 'Welcome') {
+    content = <Article title = "Welcome" body = "Hello, WEB!"></Article>
+  } else if (mode ==='READ'){
+      content = <Article title = "READ" body = "Hello, WEB!"></Article>
+  }
   return (
     <div className="App">
-       <Header onSelect = {()=> {alert("header!!")}}></Header>
-       <Nav taglist={topics} onSelect = {(id)=> {alert("NAV!!"+','+id)}}></Nav>
-       <Article title = "Welcome" body = "Hello, WEB!"></Article>
+       <Header onSelect = {()=> {setMode('Welcome')}}></Header>
+       <Nav taglist={topics} onSelect = {(id)=> {setMode('READ')}}></Nav>
+       {content}
        {/* <Button variant = "outlined"> Create </Button> */}
        <ButtonGroup variant = "contained">
        <Button variant = "outlined" onClick = {createHandler}> Create </Button>
