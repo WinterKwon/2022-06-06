@@ -60,7 +60,25 @@ function createHandler (){
   alert("create clicked")
 }
 
-
+function Create (props){
+  return (
+  <article>
+    <h2>Create</h2>
+    <form onSubmit={(evt)=>{
+        
+        evt.preventDefault();
+        const title = evt.target.title.value;
+        const body = evt.target.body.value;
+        console.log('from create: ', title, body);
+        props.onCreate(title, body);
+        }}>
+      <p><input type="text" name = "title" placeholder="title"></input></p>
+      <p><textarea name = "body" placeholder='body'></textarea></p>
+      <p><input type = "submit" value="Create"></input></p>
+    </form>
+  </article>
+  );
+}
 
 function App() {
   console.log('useState:',useState('a'));
@@ -78,7 +96,13 @@ function App() {
   if(mode === 'Welcome') {
     content = <Article title = "Welcome" body = "Hello, WEB!"></Article>
   } else if (mode ==='READ'){
-      content = <Article title = "READ" body = "Hello, WEB!"></Article>
+      content = <Article title = "READ" body = "Hello, WEB2!"></Article>
+  } else if(mode === 'CREATE'){
+    content = <Create onCreate = {(title, body)=>{
+      alert('oncreate : ', title)
+
+    }} />
+    
   }
   return (
     <div className="App">
@@ -87,7 +111,7 @@ function App() {
        {content}
        {/* <Button variant = "outlined"> Create </Button> */}
        <ButtonGroup variant = "contained">
-       <Button variant = "outlined" onClick = {createHandler}> Create </Button>
+       <Button variant = "outlined" onClick = {()=>{setMode('CREATE')}}> Create </Button>
        <Button variant = "outlined"> Update </Button>
        <Button variant = "outlined"> Delete </Button> 
           </ButtonGroup>
