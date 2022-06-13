@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, {useState} from 'react'
 import Button from '@mui/material/Button';
@@ -11,7 +10,14 @@ import Typography from '@mui/material/Typography';
 
 function Header(props){
   console.log(props);
-  return <header><h1><a href = "/" onClick={(evt)=>{
+  const myStyle = {
+    borderBottom : '1px solid gray',
+    padding : '10px',
+  }
+
+
+
+  return <header style = {myStyle}><h1><a href = "/" onClick={(evt)=>{
     console.log('event : ', evt);
     props.onSelect();
   }}>pjk Web</a></h1></header>
