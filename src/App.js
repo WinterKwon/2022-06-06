@@ -61,6 +61,9 @@ function App() {
   ];
   const [value, setValue] = useState(0);
   const [mode, setMode] = useState('Welcome');
+  const [id, setId] = useState(null);
+  console.log('mode & id : ', mode, id)
+
   // let mode = 'Welcome';
   let content = null;
   if(mode === 'Welcome') {
@@ -71,7 +74,7 @@ function App() {
   return (
     <div className="App">
        <Header onSelect = {()=> {setMode('Welcome')}}></Header>
-       <Nav taglist={topics} onSelect = {(id)=> {setMode('READ')}}></Nav>
+       <Nav taglist={topics} onSelect = {(id)=> {setMode('READ'); setId(id);}}></Nav>
        {content}
        {/* <Button variant = "outlined"> Create </Button> */}
        <ButtonGroup variant = "contained">
