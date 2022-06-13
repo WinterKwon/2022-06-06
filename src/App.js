@@ -82,14 +82,20 @@ function Create (props){
 
 function App() {
   console.log('useState:',useState('a'));
-  const topics = [
-    {id : 1, title : 'html', body : "html is..."},
-    {id : 2, title : "css", body : "css is ..."}
-  ];
+  // const topics = [
+  //   {id : 1, title : 'html', body : "html is..."},
+  //   {id : 2, title : "css", body : "css is ..."}
+  // ];
   const [value, setValue] = useState(0);
   const [mode, setMode] = useState('Welcome');
   const [id, setId] = useState(null);
   console.log('mode & id : ', mode, id)
+
+  const [ topics, setTopics] = useState([
+    {id : 1, title : 'html', body : "html is..."},
+    {id : 2, title : "css", body : "css is ..."}
+  ]);
+  const[nextId, setNextId] = useState(3);
 
   // let mode = 'Welcome';
   let content = null;
@@ -100,6 +106,14 @@ function App() {
   } else if(mode === 'CREATE'){
     content = <Create onCreate = {(title, body)=>{
       alert('oncreate : ', title)
+      const newTopic = {id:nextId, title, body}
+      const newTopics = [...topics]
+      newTopics.push(newTopic)
+      setTopics(newTopics)
+      setId(nextId)
+      setMode('READ')
+      setNextId(nextId+1)
+
 
     }} />
     
