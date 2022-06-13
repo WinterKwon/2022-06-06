@@ -105,7 +105,7 @@ function App() {
       content = <Article title = "READ" body = "Hello, WEB2!"></Article>
   } else if(mode === 'CREATE'){
     content = <Create onCreate = {(title, body)=>{
-      alert('oncreate : ', title)
+      // alert('oncreate : ', title)
       const newTopic = {id:nextId, title, body}
       const newTopics = [...topics]
       newTopics.push(newTopic)
@@ -127,7 +127,18 @@ function App() {
        <ButtonGroup variant = "contained">
        <Button variant = "outlined" onClick = {()=>{setMode('CREATE')}}> Create </Button>
        <Button variant = "outlined"> Update </Button>
-       <Button variant = "outlined"> Delete </Button> 
+       <Button variant = "outlined" onClick = {()=>{
+         const newTopics = topics.filter(e => {
+           if(e.id ===id){
+             return false;
+           } else{
+             return true
+           }
+         });
+         setMode('Welcome');
+         setTopics(newTopics);
+
+       }}> Delete </Button> 
           </ButtonGroup>
       <br /> 
       <a href="http://info.cern.ch">web</a>
