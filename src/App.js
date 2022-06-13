@@ -6,23 +6,26 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Rating , { IconContainerProps } from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-
+import styled from 'styled-components';
 
 function Header(props){
   console.log(props);
   const myStyle = {
     borderBottom : '1px solid gray',
     padding : '10px',
+    fontSize : '20px'
   }
 
-
-
-  return <header style = {myStyle}><h1><a href = "/" onClick={(evt)=>{
+  return <header className = {props.className}><h1><a href = "/" onClick={(evt)=>{
     console.log('event : ', evt);
+    evt.preventDefault();
     props.onSelect();
   }}>pjk Web</a></h1></header>
 }
 
+const HeaderStyled = styled(Header)
+`border-bottom: 1px solid green;
+`;
 
 function Nav(props){
   console.log('props data : ', props.taglist)
@@ -79,7 +82,7 @@ function App() {
   }
   return (
     <div className="App">
-       <Header onSelect = {()=> {setMode('Welcome')}}></Header>
+       <HeaderStyled onSelect = {()=> {setMode('Welcome')}}></HeaderStyled>
        <Nav taglist={topics} onSelect = {(id)=> {setMode('READ'); setId(id);}}></Nav>
        {content}
        {/* <Button variant = "outlined"> Create </Button> */}
